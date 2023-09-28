@@ -1,0 +1,35 @@
+topdown_size: 256
+resize_scale: 128
+time_scale: 1
+timelimit: 500
+sim_path: "/home/henry/Desktop/dataset/rl_envs/unity-envs/linux_v2.1/cog_sim2real_env.x86_64"
+
+uniform_laser_noise_scale: 0.1
+episode_pose_noise_scale: 0.5
+step_pose_noise_scale: 0.1
+step_angle_noise_scale: 0.0
+
+actor_hidden_size: [256,]
+critic_hidden_size: [256,]
+
+parallels: 4           
+training_steps: 500000
+nsteps: 256               
+nepoch: 2       
+nminibatch: 2
+learning_rate: 0.0001
+
+vf_coef: 0.25
+ent_coef: 0.0
+clip_range: 0.15
+gamma: 0.99
+lam: 0.95
+
+use_obsnorm: False
+use_rewnorm: True
+obsnorm_range: 5
+rewnorm_range: 5
+
+device: "cuda:0"
+logdir: "./logs/Navigator-Teacher/"
+modeldir: "./models/Navigator-Teacher/"
