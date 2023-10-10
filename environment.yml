@@ -44,3 +44,8 @@ dependencies:
     - pyyaml==6.0
     - scipy==1.8.0
     - six==1.16.0
+    - torch==1.13.0
+    - torchvision==0.14.0
+    - tensorboard==2.14.0
+    - mpi4py==3.1.4
+    - tqdm==4.66.1

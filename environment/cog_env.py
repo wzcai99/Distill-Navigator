@@ -46,8 +46,7 @@ class Cog_Env(gym.Env):
         self.env_id = env_id
         self.worker_id = np.random.randint(0,1024)
         self.time_scale = config.time_scale
-        self.env_nav_name = config.nav_path
-        self.env_con_name = config.con_path
+        self.env_sim_name = config.sim_path
         self.timelimit = config.timelimit
         self.topdown_size = config.topdown_size
         # Noise Settings
@@ -56,6 +55,7 @@ class Cog_Env(gym.Env):
         self.step_pose_noise_scale = config.step_pose_noise_scale
         self.step_angle_noise_scale = config.step_angle_noise_scale
         self.resize_scale = config.resize_scale
+        self.speed_scale = config.speed_scale
         self.laser_observation_space = Box(0,10,(60,))
         self.pose_observation_space = Box(-10,10,shape=(4,))
         self.goal_observation_space = Box(0,10,(4,))
@@ -77,7 +77,7 @@ class Cog_Env(gym.Env):
         self.mapper = CoG_Mapper()
         self.performance = []
         self.seeds = []
-        self.env = CogEnvDecoder(worker_id=self.worker_id,env_name=self.env_nav_name,time_scale=self.time_scale,no_graphics=True)
+        self.env = CogEnvDecoder(worker_id=self.worker_id,env_name=self.env_sim_name,time_scale=self.time_scale,no_graphics=True)
         
     def _rescale_angle(self,angle):
         if angle < -np.pi:
@@ -241,8 +241,8 @@ class Cog_Env(gym.Env):
     def _navigation_action_transform(self,action):
         clip_action = np.clip(action,-1,1)
         transform_action = np.zeros((4,),np.float32)
-        transform_action[0] = clip_action[0] * 2.
-        transform_action[1] = clip_action[1] * 2.
+        transform_action[0] = clip_action[0] * self.speed_scale
+        transform_action[1] = clip_action[1] * self.speed_scale
         transform_action[2] = clip_action[2] * np.pi/4
         return transform_action
 

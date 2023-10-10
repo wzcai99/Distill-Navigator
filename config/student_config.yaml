@@ -1,0 +1,37 @@
+topdown_size: 256
+resize_scale: 128
+time_scale: 1
+timelimit: 500
+sim_path: "./reality_linux_v3.0/cog_sim2real_env.x86_64"
+
+uniform_laser_noise_scale: 0.1
+episode_pose_noise_scale: 0.5
+step_pose_noise_scale: 0.1
+step_angle_noise_scale: 0.0
+speed_scale: 2.0
+
+actor_hidden_size: [256,]
+critic_hidden_size: [256,]
+
+parallels: 4           
+training_steps: 250000
+nsteps: 256               
+nepoch: 2       
+nminibatch: 2
+learning_rate: 0.0001
+
+vf_coef: 0.25
+ent_coef: 0.0
+clip_range: 0.15
+gamma: 0.99
+lam: 0.95
+
+use_obsnorm: False
+use_rewnorm: True
+obsnorm_range: 5
+rewnorm_range: 5
+
+device: "cuda:1"
+logdir: "./logs/Navigator-Student/"
+modeldir: "./models/Navigator-Student/"
+teacher_model: "./models/Navigator-Teacher/model-Tue Oct 10 02:44:53 2023-7812.pth"
